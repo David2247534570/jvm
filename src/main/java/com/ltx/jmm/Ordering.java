@@ -16,7 +16,7 @@ import org.openjdk.jcstress.infra.results.I_Result;
 public class Ordering {
 
     private int num = 0;
-    private boolean flag = false;
+    private volatile boolean flag = false;
 
     public static void main(String[] args) throws Exception {
         Main.main(args);
@@ -34,6 +34,8 @@ public class Ordering {
     @Actor
     public void actor2(I_Result result) {
         num = 2;
+        // 写写屏障
         flag = true;
+        // 写读屏障
     }
 }
